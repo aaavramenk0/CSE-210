@@ -3,7 +3,7 @@ using System;
 /* 
     Showing Creativity and Exceeding Requirements ideas and what has been done :
     1. I developed the function to save user responses at Listening Activity into file.
-    2. For future it can include user name and save all activities repost to the files.
+    2. For future it can include user name and save all activities reports to the files.
 */
 
 class Program
