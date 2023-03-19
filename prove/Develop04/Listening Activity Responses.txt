@@ -1,0 +1,2 @@
+Prompt: What are personal strengths of yours? 
+Response: hi
