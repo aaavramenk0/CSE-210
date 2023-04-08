@@ -4,7 +4,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        // Creating the scripture library with the ScriptureLibrary class and adding some scriptures 
+         
         var _library = new ScriptureLibrary();
         _library.AddScripture(new Scripture("John 3:16", "For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life."));
         _library.AddScripture(new Scripture("Philippians 4:6-7", "Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God. And the peace of God, which transcends all understanding, will guard your hearts and your minds in Christ Jesus."));
@@ -15,24 +15,18 @@ class Program
         _library.AddScripture(new Scripture("Doctrine and Covenants 88:118", "And as all have not faith, seek ye diligently and teach one another words of wisdom; yea, seek ye out of the best books words of wisdom; seek learning, even by study and also by faith."));
         _library.AddScripture(new Scripture("Doctrine and Covenants 82:10", "I, the Lord, am bound when ye do what I say; but when ye do not what I say, ye have no promise."));
 
-        
-        // Getting a random scripture from the library
         var _currentScripture = _library.GetRandomScripture();
 
-        // Prompt the user to press enter to start
         Console.WriteLine("Press enter to begin.");
         Console.ReadLine();
 
-        // Loop until all words are hidden in the scripture
         while (true)
         {
             Console.Clear();
 
-            // Display the current randomly selected scripture
             Console.WriteLine(_currentScripture.GetReference());
             Console.WriteLine(_currentScripture.GetText(true));
 
-            // Prompt the user to press enter to hide more words or to write quit to stop the program
             Console.WriteLine("Press enter to continue, or type 'quit' to exit.");
             var _input = Console.ReadLine().ToLower();
             if (_input == "quit")
@@ -40,22 +34,18 @@ class Program
                 break;
             }
 
-            // Hide a random word in the scripture
             if (!_currentScripture.HideRandomWord())
             {
-                // If all words are hidden, displays a congratulations message and reset the scripture
                 Console.Clear();
-                Console.WriteLine("Congratulations! You have Memorized this scripture.");
+                Console.WriteLine("Congratulations! You have memorized this scripture.");
                 Console.WriteLine(_currentScripture.GetReference());
                 Console.WriteLine(_currentScripture.GetText(false));
                 Console.WriteLine();
 
-                // Removes the current scripture from the library and get a new random scripture
                 _library.RemoveScripture(_currentScripture);
                 if (_library.GetTotalScriptures() == 0)
                 {
-                    // If there are no more scriptures in the library, exit the loop
-                    Console.WriteLine("You have Memorized all the scriptures!");
+                    Console.WriteLine("You have Memorized all scriptures!");
                     break;
                 }
                 else
