@@ -22,9 +22,9 @@ class Program
         video2._length = "9:38";
         video2._likes = "91k";
         video2._url = "https://www.youtube.com/watch?v=Qhaz36TZG5Y&t";
-        video2.AddComment("Ezee", "I can't believe the amount of valuable information that you explain in less than 10 minutes, amazing job as always!!");
+        video2.AddComment("Eeze", "I can't believe the amount of valuable information that you explain in less than 10 minutes, amazing job as always!!");
         video2.AddComment("Robert Szordykowski", "You explained grid in 50 seconds more comprehensibly than other tuts do in an hour. Hats off.");
-        video2.AddComment("FlockofSmeagles", "You made me appreciate the fact that I learned the box model in the beginning. I couldn't imagine designing a page without that freedom.");
+       
         Console.WriteLine(video2.GetVideoInfo());
         video2.GetComments();
         
