@@ -1,28 +1,94 @@
 using System;
+using Develop05;
 
 class Program
 {
-    static void Main(string[] args)
+    static void Main()
     {
-        Goal goal = new Goal();
-        int userChoice = 0;
-        while (userChoice != 6){
-            Console.Write("\nMenu options: \n 1. Create New Goal \n 2. List Goals \n 3. Save Goals \n 4. Load Goals \n 5. Record Event \n 6. Quit \nSelect an option from the menu: ");
-            userChoice = int.Parse(Console.ReadLine());
+        EternalQuest eternalQuest = new EternalQuest();
+        Console.WriteLine("Welcome to EternalQuest!\n");
 
-            switch (userChoice)
+        while (true)
+        {
+            Console.WriteLine("Select an option:");
+            Console.WriteLine("1. Load goals from a file");
+            Console.WriteLine("2. Add a new goal");
+            Console.WriteLine("3. View all goals");
+            Console.WriteLine("4. Exit");
+
+            string input = Console.ReadLine();
+
+            switch (input)
             {
-                case 1:
-                    goal.AddGoal();
+                case "1":
+                    Console.WriteLine("Enter the filename:");
+                    string filename = Console.ReadLine();
+                    ConfirmFileLoad(filename, eternalQuest);
                     break;
-                case 2:
-                    goal.ListGoals();
+
+                case "2":
+                    AddNewGoal(eternalQuest);
                     break;
-                case 6:
+
+                case "3":
+                    ViewAllGoals(eternalQuest);
                     break;
-                default: break;
+
+                case "4":
+                    Console.WriteLine("Goodbye!");
+                    return;
+
+                default:
+                    Console.WriteLine("Invalid option.");
+                    break;
             }
         }
-        
+    }
+
+    static void ConfirmFileLoad(string filename, EternalQuest eternalQuest)
+    {
+        Console.Clear();
+
+        if (File.Exists(filename))
+        {
+            eternalQuest.LoadGoals(filename);
+            Message("File loaded successfully.");
+        }
+        else
+        {
+            Message("No such file in directory.");
+        }
+    }
+
+    static void AddNewGoal(EternalQuest eternalQuest)
+    {
+        Console.Clear();
+
+        Console.WriteLine("Enter the new goal:");
+        string goal = Console.ReadLine();
+
+        eternalQuest.AddGoal(goal);
+        Message("Goal added successfully.");
+    }
+
+    static void ViewAllGoals(EternalQuest eternalQuest)
+    {
+        Console.Clear();
+
+        Console.WriteLine("All goals:");
+
+        foreach (string goal in eternalQuest.GetGoals())
+        {
+            Console.WriteLine("- " + goal);
+        }
+
+        Console.ReadLine();
+    }
+
+    static void Message(string message)
+    {
+        Console.Clear();
+        Console.WriteLine(message);
+        Console.ReadLine();
     }
 }

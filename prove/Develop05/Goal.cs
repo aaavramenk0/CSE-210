@@ -1,71 +1,79 @@
-public class Goal
+
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+
+namespace Develop05
 {
-    private List<string> goals = new List<string>();
-    private string _goalName;
-    private string _description;
-    private int _pointsAmount;
-    private int _checklistAmount;
-    private int _checklistBonus;
-    public void AddGoal(){
-        int userChoice;
-        Console.Write("\nThe types of the goals are: \n 1. Simple Goal \n 2. Eternal Goal \n 3. Checklist Goal \nWhich type of goal would you like to create? ");
-        userChoice = int.Parse(Console.ReadLine());
+    public abstract class Goal
+    {
+        private bool _complete;
 
-        switch (userChoice)
+        protected string _name;
+        protected string _description;
+        protected int _value;
+
+        public bool Complete
         {
-            case 1:
-                Console.Write("\nWhat is the name of your goal? ");
-                _goalName = Console.ReadLine();
-
-                Console.Write("What is the short description of this goal? ");
-                _description = Console.ReadLine();
-
-                Console.Write("What is the amount of points associated with this goal? ");
-                _pointsAmount = int.Parse(Console.ReadLine());
-
-                goals.Add($"[ ] {_goalName} ({_description})");
-                break;
-            
-            case 2: 
-                Console.Write("\nWhat is the name of your goal? ");
-                _goalName = Console.ReadLine();
-
-                Console.Write("What is the short description of this goal? ");
-                _description = Console.ReadLine();
-
-                Console.Write("What is the amount of points associated with this goal? ");
-                _pointsAmount = int.Parse(Console.ReadLine());
-
-                goals.Add($"[ ] {_goalName} ({_description})");
-                break;
-
-            case 3: 
-                Console.Write("\nWhat is the name of your goal? ");
-                _goalName = Console.ReadLine();
-
-                Console.Write("What is the short description of this goal? ");
-                _description = Console.ReadLine();
-
-                Console.Write("What is the amount of points associated with this goal? ");
-                _pointsAmount = int.Parse(Console.ReadLine());
-
-                Console.Write("How many times does this goal need to be acomplished for a bonus? ");
-                _checklistAmount = int.Parse(Console.ReadLine());
-
-                Console.Write("What is the bonus for accomplishing it that many times? ");
-                _checklistBonus = int.Parse(Console.ReadLine());
-
-                goals.Add($"[ ] {_goalName} ({_description}) -- Currently completed: 0/{_checklistAmount}");
-                break;
-            default: 
-                break;
+            get { return _complete; }
         }
-    }
 
-    public void ListGoals() {
-        foreach (string goal in goals)
+        public Goal(string name, string description, int value, bool complete = false)
         {
-            Console.WriteLine(goal);
+            _name = name;
+            _description = description;
+            _value = value;
+            _complete = complete;
+        }
+
+        public virtual int GetPoints()
+        {
+            if (_complete)
+            {
+                return _value;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        public virtual string GetStringRepresentation()
+        {
+            string StringRepresentation = $"Goal:{_name}~{_description}~{_value}~{_complete}";
+            return StringRepresentation;
+        }
+
+        public virtual void MarkComplete()
+        {
+            if (!_complete)
+            {
+                _complete = true;
+                Console.WriteLine($"Congratulations! You have completed the {_name} goal and earned {_value} points.");
+            }
+        }
+
+        public virtual void DisplayEntry()
+        {
+            if (_complete)
+            {
+                Console.WriteLine($"[x] {_name}: {_description} - Completed!");
+            }
+            else
+            {
+                Console.WriteLine($"[ ] {_name}: {_description}");
+            }
+        }
+
+        public string GetName()
+        {
+            return _name;
+        }
+
+        public string GetDescription()
+        {
+            return _description;
         }
     }
 }
